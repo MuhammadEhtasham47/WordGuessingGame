@@ -1,7 +1,5 @@
 import React from 'react'
-
-// components
-import Row from './Row'
+import Row from './Row.jsx'
 
 export default function Grid({ guesses, currentGuess, turn }) {
     return (

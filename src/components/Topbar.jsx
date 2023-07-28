@@ -15,9 +15,13 @@ const MainContainer = styled(Box)(() => ({
     background: '#F3F3F3',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
     padding: '0px 22px',
     marginBottom: '87px'
+}));
+
+const SVGsBox = styled(Box)(() => ({
+    display: 'flex',
+    gap: '30px',
 }));
 
 const MainHeading = styled(Typography)(() => ({
@@ -29,15 +33,19 @@ const MainHeading = styled(Typography)(() => ({
     fontWeight: 600,
     lineHeight: "normal",
     letterSpacing: "3px",
+    marginRight: '86px'
 }));
 
 export default function Topbar() {
     return (
         <MainContainer>
-            <QuestionCircleGrey />
+            <QuestionCircleGrey style={{ marginRight: '136px' }} />
             <MainHeading>FOREVERDLE</MainHeading>
-            <StatBarsGrey />
-            <SettingsGrey />
+            <SVGsBox>
+                <StatBarsGrey />
+                <SettingsGrey />
+            </SVGsBox>
+
         </MainContainer>
     )
 }

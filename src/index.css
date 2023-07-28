@@ -10,7 +10,6 @@ h1 {
   padding: 20px 0;
   border-bottom: 1px solid #eee;
   margin: 0 0 30px 0;
-  color: #333;
 }
 
 /* rows */
@@ -21,33 +20,40 @@ h1 {
 }
 
 .row>div {
-  display: block;
-  width: 60px;
-  height: 60px;
-  border: 1px solid #bbb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(147, 155, 159, 0.30);
+  width: 75px;
+  height: 76px;
+  border: 1px solid rgba(147, 155, 159, 0.30);
+  border-radius: 5px;
   margin: 4px;
-  text-align: center;
-  line-height: 60px;
   text-transform: uppercase;
-  font-weight: bold;
-  font-size: 2.5em;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 35px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  color: #56575E;
 }
 
 .row>div.green {
-  --background: #5ac85a;
-  --border-color: #5ac85a;
+  --background: #66A060;
+  --border-color: #66A060;
   animation: flip 0.5s ease forwards;
 }
 
 .row>div.grey {
-  --background: #a1a1a1;
-  --border-color: #a1a1a1;
+  --background: #939B9F;
+  --border-color: #939B9F;
   animation: flip 0.6s ease forwards;
 }
 
 .row>div.yellow {
-  --background: #e2cc68;
-  --border-color: #e2cc68;
+  --background: #CEB02C;
+  --border-color: #CEB02C;
   animation: flip 0.5s ease forwards;
 }
 
@@ -68,75 +74,104 @@ h1 {
 }
 
 .row.current>div.filled {
+  color: #56575E;
   animation: bounce 0.2s ease-in-out forwards;
 }
 
 .keypad {
-  max-width: 500px;
+  max-width: 580px;
   margin: 20px auto;
 }
 
-.keypad>div {
+.keypad>button {
   margin: 5px;
-  min-width: 40px;
   width: max-content;
-  height: 50px;
-  background: #eee;
-  display: inline-block;
-  border-radius: 6px;
+  min-width: 44.665px;
+  height: 51.046px;
+  border-radius: 5px;
+  background: #D3D6DA;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   line-height: 50px;
+  color: #56575E;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  text-transform: uppercase;
 }
 
-.keypad>div.green {
-  background: #5ac85a;
-  color: #fff;
+.keypad>button:hover {
+  background-color: #c6cdd5;
+}
+
+.keypad>button.green {
+  background: #66A060;
+  color: #FFF;
   transition: all 0.3s ease-in;
 }
 
-.keypad>div.yellow {
-  background: #e2cc68;
-  color: #fff;
+.keypad>button.yellow {
+  background: #CEB02C;
+  color: #FFF;
   transition: all 0.3s ease-in;
 }
 
-.keypad>div.grey {
-  background: #a1a1a1;
-  color: #fff;
+.keypad>button.grey {
+  background: #939B9F;
+  color: #FFF;
   transition: all 0.3s ease-in;
+}
+
+.keypad>button.green:hover {
+  background: #78b37d;
+}
+
+.keypad>button.yellow:hover {
+  background: #b39721;
+}
+
+.keypad>button.grey:hover {
+  background: #777d80;
 }
 
 /* keyframe animations */
 @keyframes flip {
   0% {
     transform: rotateX(0);
-    background: #fff;
-    border-color: #333;
+    background: rgba(147, 155, 159, 0.30);
+    border-color: rgba(147, 155, 159, 0.30);
+    color: #56575E;
   }
 
   45% {
     transform: rotateX(90deg);
-    background: white;
-    border-color: #333;
+    background: rgba(147, 155, 159, 0.30);
+    border-color: rgba(147, 155, 159, 0.30);
+    color: #56575E;
   }
 
   55% {
     transform: rotateX(90deg);
     background: var(--background);
     border-color: var(--border-color);
+    color: #56575E;
   }
 
   100% {
     transform: rotateX(0deg);
     background: var(--background);
     border-color: var(--border-color);
-    color: #eee;
+    color: #FFF;
   }
 }
 
 @keyframes bounce {
   0% {
     transform: scale(1);
-    border-color: #ddd;
   }
 
   50% {
@@ -145,6 +180,5 @@ h1 {
 
   100% {
     transform: scale(1);
-    border-color: #333;
   }
 }

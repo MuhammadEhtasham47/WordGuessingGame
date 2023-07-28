@@ -5,6 +5,7 @@ import Keypad from './Keypad.jsx'
 import ModalDetails from './ModalDetails.jsx'
 import Topbar from './Topbar.jsx'
 import { Box, Modal } from '@mui/material'
+import styled from '@emotion/styled'
 
 const style = {
     position: 'absolute',
@@ -18,6 +19,12 @@ const style = {
     p: 4,
 };
 
+const MainContainer = styled(Box)(() => ({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+}));
+
 export default function Wordle({ solution }) {
     const { currentGuess, guesses, turn, isCorrect, usedKeys, handleKeyup } = useWordle(solution)
     const [showModal, setShowModal] = useState(false)
@@ -28,7 +35,7 @@ export default function Wordle({ solution }) {
             setShowModal(true)
             window.removeEventListener('keyup', handleKeyup)
         }
-        if (turn > 5) {
+        if (turn > 4) {
             setShowModal(true)
             window.removeEventListener('keyup', handleKeyup)
         }
@@ -37,10 +44,11 @@ export default function Wordle({ solution }) {
     }, [handleKeyup, isCorrect, turn])
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+
+        <MainContainer >
             <Topbar />
             <Grid guesses={guesses} currentGuess={currentGuess} turn={turn} />
-            <Keypad usedKeys={usedKeys} />
+            <Keypad usedKeys={usedKeys} handleKeyup={handleKeyup} currentGuess={currentGuess} />
             <Modal
                 open={showModal}
                 onClose={() => setShowModal(false)}
@@ -49,6 +57,6 @@ export default function Wordle({ solution }) {
                     <ModalDetails isCorrect={isCorrect} turn={turn} solution={solution}></ModalDetails>
                 </Box>
             </Modal>
-        </div>
+        </MainContainer>
     )
 }

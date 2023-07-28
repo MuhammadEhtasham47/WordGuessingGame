@@ -40,7 +40,7 @@ export default function Keypad({ usedKeys, handleKeyup, currentGuess }) {
                 )
             })}
 
-            <EnterButton disabled={guessLength !== 5 ? true : false} onClick={() => { handleKeyup({ key: 'ENTER' }) }}  >ENTER</EnterButton>
+            <EnterButton disabled={guessLength !== 5 ? true : false} onClick={() => { handleKeyup({ key: 'Enter' }) }}  >ENTER</EnterButton>
             {
                 lettersArray2 && lettersArray2.map(l => {
                     const color = usedKeys[l.key]
@@ -49,7 +49,7 @@ export default function Keypad({ usedKeys, handleKeyup, currentGuess }) {
                     )
                 })
             }
-            <Button onClick={() => { handleKeyup({ key: 'DELETE' }) }} style={{ width: '71.783px' }} ><BackspaceOutlinedIcon /></Button>
+            <Button onClick={() => { handleKeyup({ key: 'Backspace' }) }} style={{ width: '71.783px' }} ><BackspaceOutlinedIcon /></Button>
         </div >
     )
 }

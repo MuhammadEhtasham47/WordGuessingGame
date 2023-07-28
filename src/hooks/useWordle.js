@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { toast } from 'react-hot-toast'
 
 const useWordle = (solution) => {
     const [turn, setTurn] = useState(0)
@@ -87,7 +88,7 @@ const useWordle = (solution) => {
             }
             // do not allow duplicate words
             if (history.includes(currentGuess)) {
-                console.log('you already tried that word.')
+                toast.error('You have already tried that word.')
                 return
             }
             // check word is 5 chars

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Wordle from "./components/Wordle.jsx";
-
+import { Toaster } from 'react-hot-toast';
 function App() {
 
   let words = [
@@ -35,6 +35,7 @@ function App() {
 
   return (
     < >
+      < Toaster />
       {solution && <div>Solution is: {solution}</div>}
       {solution && <Wordle solution={solution} />}
     </>

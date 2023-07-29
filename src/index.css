@@ -89,12 +89,10 @@ h1 {
   min-width: 44.665px;
   height: 51.046px;
   border-radius: 5px;
-  background: #D3D6DA;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   line-height: 50px;
-  color: #56575E;
   text-align: center;
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
@@ -103,6 +101,15 @@ h1 {
   line-height: normal;
   text-transform: uppercase;
 }
+
+.dark-theme .keypad>button {
+  background: #565F7E
+}
+
+.light-theme .keypad>button {
+  background: #D3D6DA;
+}
+
 
 .keypad>button:hover {
   background-color: #c6cdd5;
@@ -121,7 +128,13 @@ h1 {
 }
 
 .keypad>button.grey {
-  background: #939B9F;
+  background: #818181;
+  color: #FFF;
+  transition: all 0.3s ease-in;
+}
+
+.keypad>button.darkgrey {
+  background: #4C5255;
   color: #FFF;
   transition: all 0.3s ease-in;
 }

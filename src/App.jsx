@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Wordle from "./components/Wordle.jsx";
 import { Toaster } from 'react-hot-toast';
-function App() {
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { useSelector } from "react-redux";
 
+function App() {
   let words = [
     { "id": 1, "word": "ninja" },
     { "id": 2, "word": "spade" },
@@ -31,15 +34,33 @@ function App() {
     setSolution(randomSolution.word)
   }, [setSolution])
 
+  const themeMode = useSelector((state) => state.theme.themeMode)
+
+  console.log(themeMode);
 
 
+  const theme = useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: themeMode,
+          background: {
+            default: themeMode === 'dark' ? '#262B3C' : '#FFFFFF', // Set the background color here
+          },
+        },
+      }),
+    [themeMode],
+  );
+
+  // const theme = useMemo(() => createCustomTheme(), []);
   return (
-    < >
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
       < Toaster />
       {solution && <div>Solution is: {solution}</div>}
       {solution && <Wordle solution={solution} />}
-    </>
-  );
+    </ThemeProvider>
+  )
 }
 
 export default App;

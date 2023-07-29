@@ -7,12 +7,13 @@ import { ReactComponent as StatBarsWhite } from "../assets/StatBarsWhite.svg";
 import { ReactComponent as QuestionCircleGrey } from "../assets/QuestionCircleGrey.svg";
 import { ReactComponent as SettingsGrey } from "../assets/SettingsGrey.svg";
 import { ReactComponent as StatBarsGrey } from "../assets/StatBarsGrey.svg";
-
+import { useSelector } from 'react-redux';
+import { makeThemeDark, makeThemeLight } from '../redux/themeSlice';
+import { useDispatch } from 'react-redux';
 const MainContainer = styled(Box)(() => ({
     width: '638px',
     height: '84px',
     borderRadius: '15px',
-    background: '#F3F3F3',
     display: 'flex',
     alignItems: 'center',
     padding: '0px 22px',
@@ -25,7 +26,6 @@ const SVGsBox = styled(Box)(() => ({
 }));
 
 const MainHeading = styled(Typography)(() => ({
-    color: "#202537",
     textAlign: "center",
     fontFamily: "Roboto",
     fontSize: "40px",
@@ -33,17 +33,38 @@ const MainHeading = styled(Typography)(() => ({
     fontWeight: 600,
     lineHeight: "normal",
     letterSpacing: "3px",
-    marginRight: '86px'
+    marginRight: '66px'
 }));
 
 export default function Topbar() {
+    const dispatch = useDispatch()
+    const themeMode = useSelector((state) => state.theme.themeMode)
+
     return (
-        <MainContainer>
-            <QuestionCircleGrey style={{ marginRight: '136px' }} />
-            <MainHeading>FOREVERDLE</MainHeading>
+        <MainContainer sx={{ background: themeMode === 'light' ? '#F3F3F3' : 'rgba(218, 220, 224, 0.03)', }}>
+
+            {themeMode === 'light' ?
+                <QuestionCircleGrey style={{ marginRight: '120px', cursor: 'pointer' }} />
+                :
+                <QuestionCircleWhite style={{ marginRight: '120px', cursor: 'pointer' }} />
+            }
+
+
+
+            <MainHeading sx={{ color: themeMode === 'light' ? "#202537" : '#FFF', }}>FOREVERDLE</MainHeading>
             <SVGsBox>
-                <StatBarsGrey />
-                <SettingsGrey />
+                {themeMode === 'light' ?
+                    <>
+                        <StatBarsGrey style={{ cursor: 'pointer' }} />
+                        <SettingsGrey onClick={() => { console.log('changingtheme to dark'); dispatch(makeThemeDark()) }} style={{ cursor: 'pointer' }} />
+                    </>
+                    :
+                    <>
+                        <StatBarsWhite style={{ cursor: 'pointer' }} />
+                        <SettingsWhite onClick={() => { console.log('changingtheme to light'); dispatch(makeThemeLight()) }} style={{ cursor: 'pointer' }} />
+                    </>
+                }
+
             </SVGsBox>
 
         </MainContainer>

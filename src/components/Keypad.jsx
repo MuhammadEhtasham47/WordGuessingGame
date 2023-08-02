@@ -5,19 +5,21 @@ import styled from '@emotion/styled';
 import { useSelector } from 'react-redux';
 const lettersArray1 = [
     { key: "q" }, { key: "w" }, { key: "e" }, { key: "r" }, { key: "t" }, { key: "y" },
-    { key: "u" }, { key: "i" }, { key: "o" }, { key: "p" }, { key: "a" }, { key: "s" },
-    { key: "d" }, { key: "f" }, { key: "g" }, { key: "h" }, { key: "j" }, { key: "k" },
-    { key: "l" }
+    { key: "u" }, { key: "i" }, { key: "o" }, { key: "p" },
+];
+const lettersArray2 = [
+    { key: "a" }, { key: "s" }, { key: "d" }, { key: "f" }, { key: "g" }, { key: "h" },
+    { key: "j" }, { key: "k" }, { key: "l" }
 ];
 
-const lettersArray2 = [
+const lettersArray3 = [
     { key: "z" }, { key: "x" }, { key: "c" }, { key: "v" }, { key: "b" },
     { key: "n" }, { key: "m" },
 ];
 
 
 const EnterButton = styled(Button)(() => ({
-    width: "71.783px",
+    width: "auto",
     fontWeight: 600,
     fontSize: "15px",
 }));
@@ -45,10 +47,9 @@ export default function Keypad({ usedKeys, handleKeyup, currentGuess }) {
                         )
                     })
                 }
+            </div >
+            <div className='keypad'>
 
-
-
-                <EnterButton sx={{ background: themeMode === 'dark' ? '#565F7E' : '#D3D6DA', color: themeMode === 'dark' ? '#FFF' : '#56575E' }} disabled={guessLength !== 5 ? true : false} onClick={() => { handleKeyup({ key: 'Enter' }) }}  >ENTER</EnterButton>
                 {
                     lettersArray2 && lettersArray2.map(l => {
                         const color = usedKeys[l.key]
@@ -57,7 +58,20 @@ export default function Keypad({ usedKeys, handleKeyup, currentGuess }) {
                         )
                     })
                 }
-                < Button sx={{ background: themeMode === 'dark' ? '#565F7E' : '#D3D6DA', color: themeMode === 'dark' ? '#FFF' : '#56575E' }} onClick={() => { handleKeyup({ key: 'Backspace' }) }} style={{ width: '71.783px' }} ><BackspaceOutlinedIcon /></Button>
+            </div>
+
+
+            <div className='keypad'>
+                <Button sx={{ background: themeMode === 'dark' ? '#565F7E' : '#D3D6DA', color: themeMode === 'dark' ? '#FFF' : '#56575E' }} disabled={guessLength !== 5 ? true : false} onClick={() => { handleKeyup({ key: 'Enter' }) }}  >ENTER</Button>
+                {
+                    lettersArray3 && lettersArray3.map(l => {
+                        const color = usedKeys[l.key]
+                        return (
+                            <Button sx={{ background: themeMode === 'dark' ? '#565F7E' : '#D3D6DA', color: themeMode === 'dark' ? '#FFF' : '#56575E' }} onClick={() => { handleKeyup({ key: l.key }) }} key={l.key} className={(color === 'grey' && themeMode === 'dark') ? `dark${color}` : color}>{l.key}</Button>
+                        )
+                    })
+                }
+                < Button sx={{ background: themeMode === 'dark' ? '#565F7E' : '#D3D6DA', color: themeMode === 'dark' ? '#FFF' : '#56575E' }} onClick={() => { handleKeyup({ key: 'Backspace' }) }}  ><BackspaceOutlinedIcon sx={{ fontSize: { xs: '14px', xs350px: '14x', xs450: '20px', sm: '22px' } }} /></Button>
             </div >
         </Box>
     )

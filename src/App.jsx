@@ -36,9 +36,6 @@ function App() {
 
   const themeMode = useSelector((state) => state.theme.themeMode)
 
-  console.log(themeMode);
-
-
   const theme = useMemo(
     () =>
       createTheme({
@@ -46,6 +43,18 @@ function App() {
           mode: themeMode,
           background: {
             default: themeMode === 'dark' ? '#262B3C' : '#FFFFFF', // Set the background color here
+          },
+        },
+        breakpoints: {
+          values: {
+            xs: 0,
+            xs350: 350,      // Extra small devices (portrait phones)
+            xs450: 450,      // Extra small devices (portrait phones)
+            sm: 638,    // Small devices (landscape phones)
+            md: 960,    // Medium devices (tablets)
+            lg: 1280,   // Large devices (laptops/desktops)
+            xl: 1920,   // Extra large devices (large desktops)
+            // Add more breakpoints as needed
           },
         },
       }),

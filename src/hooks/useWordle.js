@@ -1,13 +1,21 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 
 const useWordle = (solution) => {
     const [turn, setTurn] = useState(0)
     const [currentGuess, setCurrentGuess] = useState('')
-    const [guesses, setGuesses] = useState([...Array(5)]) // each guess is an array
+    const [guesses, setGuesses] = useState([...Array(6)]) // each guess is an array
     const [history, setHistory] = useState([]) // each guess is a string
     const [isCorrect, setIsCorrect] = useState(false)
     const [usedKeys, setUsedKeys] = useState({}) // {a: 'grey', b: 'green', c: 'yellow'} etc
+    const [incorrectGuess, setIncorrectGuess] = useState(0);
+
+
+    useEffect(() => {
+        if (turn >= 6 && incorrectGuess < 6) {
+            setGuesses((prevGuesses) => [...prevGuesses, undefined]);
+        }
+    }, [incorrectGuess, turn])
 
     // format a guess into an array of letter objects 
     // e.g. [{key: 'a', color: 'yellow'}]
@@ -41,7 +49,9 @@ const useWordle = (solution) => {
     // add one to the turn state
     const addNewGuess = (formattedGuess) => {
         if (currentGuess === solution) {
-            setIsCorrect(true)
+            setIsCorrect(true);
+        } else {
+            setIncorrectGuess((prevIncorrectGuess) => prevIncorrectGuess + 1);
         }
         setGuesses(prevGuesses => {
             let newGuesses = [...prevGuesses]
@@ -54,26 +64,31 @@ const useWordle = (solution) => {
         setTurn(prevTurn => {
             return prevTurn + 1
         })
-        setUsedKeys(prevUsedKeys => {
-            formattedGuess.forEach(l => {
-                const currentColor = prevUsedKeys[l.key]
+        if (currentGuess === solution) {
+            setUsedKeys({})
+        } else {
+            setUsedKeys(prevUsedKeys => {
+                formattedGuess.forEach(l => {
+                    const currentColor = prevUsedKeys[l.key]
 
-                if (l.color === 'green') {
-                    prevUsedKeys[l.key] = 'green'
-                    return
-                }
-                if (l.color === 'yellow' && currentColor !== 'green') {
-                    prevUsedKeys[l.key] = 'yellow'
-                    return
-                }
-                if (l.color === 'grey' && currentColor !== ('green' || 'yellow')) {
-                    prevUsedKeys[l.key] = 'grey'
-                    return
-                }
+                    if (l.color === 'green') {
+                        prevUsedKeys[l.key] = 'green'
+                        return
+                    }
+                    if (l.color === 'yellow' && currentColor !== 'green') {
+                        prevUsedKeys[l.key] = 'yellow'
+                        return
+                    }
+                    if (l.color === 'grey' && currentColor !== ('green' || 'yellow')) {
+                        prevUsedKeys[l.key] = 'grey'
+                        return
+                    }
+                })
+
+                return prevUsedKeys
             })
+        }
 
-            return prevUsedKeys
-        })
         setCurrentGuess('')
     }
 
@@ -82,15 +97,15 @@ const useWordle = (solution) => {
     const handleKeyup = ({ key }) => {
         if (key === 'Enter') {
             // only add guess if turn is less than 5
-            if (turn > 4) {
+            if (incorrectGuess > 5) {
                 console.log('you used all your guesses!')
                 return
             }
             // do not allow duplicate words
-            if (history.includes(currentGuess)) {
-                toast.error('You have already tried that word.')
-                return
-            }
+            // if (history.includes(currentGuess)) {
+            //     toast.error('You have already tried that word.')
+            //     return
+            // }
             // check word is 5 chars
             if (currentGuess.length !== 5) {
                 console.log('word must be 5 chars.')
@@ -105,12 +120,13 @@ const useWordle = (solution) => {
         }
         if (/^[A-Za-z]$/.test(key)) {
             if (currentGuess.length < 5) {
-                setCurrentGuess(prev => prev + key)
+                let lowerCaseKey = key.toLowerCase()
+                setCurrentGuess(prev => prev + lowerCaseKey)
             }
         }
     }
 
-    return { turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup }
+    return { turn, currentGuess, guesses, isCorrect, usedKeys, handleKeyup, incorrectGuess }
 }
 
 export default useWordle

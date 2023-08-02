@@ -4,8 +4,12 @@ import Grid from './Grid.jsx'
 import Keypad from './Keypad.jsx'
 import ModalDetails from './ModalDetails.jsx'
 import Topbar from './Topbar.jsx'
-import { Box, Modal } from '@mui/material'
+import { Box, Modal, Typography } from '@mui/material'
 import styled from '@emotion/styled'
+import { useSelector } from 'react-redux'
+import Settings from './Settings'
+import Help from './Help'
+import { Stats } from './Stats'
 
 const style = {
     position: 'absolute',
@@ -22,20 +26,29 @@ const style = {
 const MainContainer = styled(Box)(() => ({
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
+    width: '100%',
+    justifyContent: 'center',
 }));
 
 export default function Wordle({ solution }) {
-    const { currentGuess, guesses, turn, isCorrect, usedKeys, handleKeyup } = useWordle(solution)
+    const { currentGuess, guesses, turn, isCorrect, usedKeys, handleKeyup, incorrectGuess } = useWordle(solution)
     const [showModal, setShowModal] = useState(false)
+
+    const shouldSettingsOpen = useSelector((state) => state.user.shouldSettingsOpen)
+    const shouldHelpOpen = useSelector((state) => state.user.shouldHelpOpen)
+    const shouldStatsOpen = useSelector((state) => state.user.shouldStatsOpen)
+
+
+
     useEffect(() => {
         window.addEventListener('keyup', handleKeyup)
 
-        if (isCorrect) {
-            setShowModal(true)
-            window.removeEventListener('keyup', handleKeyup)
-        }
-        if (turn > 4) {
+        // if (isCorrect) {
+        //     setShowModal(true)
+        //     window.removeEventListener('keyup', handleKeyup)
+        // }
+        if (incorrectGuess > 5) {
             setShowModal(true)
             window.removeEventListener('keyup', handleKeyup)
         }
@@ -43,12 +56,48 @@ export default function Wordle({ solution }) {
         return () => window.removeEventListener('keyup', handleKeyup)
     }, [handleKeyup, isCorrect, turn])
 
+    // useEffect(() => {
+    //     console.log('usedKeys', usedKeys);
+    // }, [usedKeys])
+
+    console.log('shouldSettingsOpen', shouldSettingsOpen);
+    console.log('shouldStatsOpen', shouldStatsOpen);
+    console.log('shouldHelpOpen', shouldHelpOpen);
+
+
     return (
 
         <MainContainer >
             <Topbar />
-            <Grid guesses={guesses} currentGuess={currentGuess} turn={turn} />
-            <Keypad usedKeys={usedKeys} handleKeyup={handleKeyup} currentGuess={currentGuess} />
+            {/* <Typography>incorrectGuess {incorrectGuess}</Typography>
+            <Typography>guessLength {guesses.length}</Typography>
+            <Typography>turn {turn}</Typography> */}
+
+
+
+            {
+                shouldSettingsOpen && <Settings />
+            }
+
+            {
+                shouldHelpOpen && <Help />
+            }
+
+            {
+                shouldStatsOpen && <Stats />
+            }
+
+            {
+                (shouldHelpOpen === false && shouldSettingsOpen === false && shouldStatsOpen === false) &&
+                <>
+                    <Grid guesses={guesses} currentGuess={currentGuess} turn={turn} />
+                    <Keypad usedKeys={usedKeys} handleKeyup={handleKeyup} currentGuess={currentGuess} />
+                </>
+            }
+
+
+
+
             <Modal
                 open={showModal}
                 onClose={() => setShowModal(false)}
@@ -57,6 +106,8 @@ export default function Wordle({ solution }) {
                     <ModalDetails isCorrect={isCorrect} turn={turn} solution={solution}></ModalDetails>
                 </Box>
             </Modal>
+
+
         </MainContainer>
     )
 }

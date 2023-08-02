@@ -74,17 +74,17 @@ h1 {
 }
 
 .row.current>div.filled {
-  color: #56575E;
+  /* color: #56575E; */
   animation: bounce 0.2s ease-in-out forwards;
 }
 
 .keypad {
-  max-width: 580px;
+  /* max-width: 580px; */
   margin: 20px auto;
 }
 
 .keypad>button {
-  margin: 5px;
+  margin: -5px 5px;
   width: max-content;
   min-width: 44.665px;
   height: 51.046px;
@@ -100,6 +100,10 @@ h1 {
   font-weight: 600;
   line-height: normal;
   text-transform: uppercase;
+}
+
+.backIcon {
+  font-size: 70px;
 }
 
 .dark-theme .keypad>button {
@@ -193,5 +197,97 @@ h1 {
 
   100% {
     transform: scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .row>div {
+    width: 75px;
+    height: 76px;
+  }
+
+  .keypad>button {
+    min-width: 40px;
+    height: 45px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 550px) {
+  .keypad>button {
+    min-width: 35px;
+    height: 45px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 500px) {
+  .keypad>button {
+    min-width: 30px;
+    height: 45px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 450px) {
+  .row>div {
+    width: 65px;
+    height: 66px;
+  }
+
+  .keypad>button {
+    min-width: 22px;
+    height: 35px;
+    font-size: 12px;
+    margin: -5px 4.5px
+  }
+}
+
+@media (max-width: 400px) {
+  .row>div {
+    width: 55px;
+    height: 56px;
+  }
+
+  .keypad>button {
+    min-width: 15px;
+    height: 30px;
+    font-size: 10px;
+    margin: -5px 3px
+  }
+}
+
+@media (max-width: 350px) {
+  .row>div {
+    width: 50px;
+    height: 50px;
+  }
+
+  .keypad>button {
+    min-width: 11.5px;
+    height: 28px;
+    font-size: 7px;
+    margin: -5px 0.5px
+  }
+}
+
+@media (max-width: 300px) {
+  .row>div {
+    width: 40px;
+    height: 40px;
+  }
+
+  .keypad>button {
+    min-width: 30px;
+    height: 20px;
+    font-size: 4px;
+    margin: -10px 4px
+  }
+}
+
+@media (max-width: 250px) {
+  .row>div {
+    width: 30px;
+    height: 30px;
   }
 }

@@ -1,6 +1,8 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 export default function Row({ guess, currentGuess }) {
+    const themeMode = useSelector((state) => state.theme.themeMode)
 
     if (guess) {
         return (
@@ -18,7 +20,7 @@ export default function Row({ guess, currentGuess }) {
         return (
             <div className="row current">
                 {letters.map((letter, i) => (
-                    <div key={i} className="filled">{letter}</div>
+                    <div style={{ color: themeMode === 'light' ? '#56575E' : '#FFF' }} key={i} className="filled">{letter}</div>
                 ))}
                 {[...Array(5 - letters.length)].map((_, i) => (
                     <div key={i}></div>

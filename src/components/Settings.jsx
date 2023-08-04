@@ -92,7 +92,9 @@ const Settings = () => {
                         fontSize: { xs: '20px', xs350: '25px', xs450: '30px', sm: '35px' },
                         fontWeight: 500,
                         position: "absolute",
-                        right: '20px'
+                        right: '20px',
+                        cursor: "pointer"
+
                     }}
                     onClick={() => { dispatch(closeSettings()) }}
                 />

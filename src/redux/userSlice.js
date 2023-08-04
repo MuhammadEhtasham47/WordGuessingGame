@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
+    words: [],
     shouldSettingsOpen: false,
     shouldHelpOpen: false,
     shouldStatsOpen: false,
@@ -10,6 +11,9 @@ const initialState = {
     winPercentage: 0,
     bestTry: 0,
     maxStreak: 0,
+    currentStreak: 0,
+    wordsGuessed: 0,
+    showModal: false
 
 }
 
@@ -53,10 +57,39 @@ export const userSlice = createSlice({
         animateFalse: (state) => {
             state.animation = false
         },
-
+        setWords: (state, action) => {
+            state.words = action.payload.data.gameArray.wordArray;
+        },
+        setCurrentStreak: (state, action) => {
+            state.currentStreak = action.payload;
+        },
+        setBestTry: (state, action) => {
+            state.bestTry = action.payload;
+        },
+        setMaxStreak: (state, action) => {
+            state.maxStreak = action.payload;
+        },
+        setWinPercentage: (state, action) => {
+            state.winPercentage = action.payload;
+        },
+        setGamesWon: (state, action) => {
+            state.gamesWon = action.payload;
+        },
+        setGamesPlayed: (state, action) => {
+            state.gamesPlayed = action.payload;
+        },
+        setWordsGuessed: (state, action) => {
+            state.wordsGuessed = action.payload;
+        },
+        openShowModal: (state) => {
+            state.showModal = true;
+        },
+        closeShowModal: (state) => {
+            state.showModal = false;
+        },
     },
 })
 
-export const { openHelp, openSettings, openStats, closeHelp, closeSettings, closeStats, animateFalse, animateTrue } = userSlice.actions
+export const { openShowModal, closeShowModal, setWordsGuessed, setBestTry, setCurrentStreak, setGamesPlayed, setGamesWon, setMaxStreak, setWinPercentage, openHelp, openSettings, openStats, closeHelp, closeSettings, closeStats, animateFalse, animateTrue, setWords } = userSlice.actions
 
 export default userSlice.reducer

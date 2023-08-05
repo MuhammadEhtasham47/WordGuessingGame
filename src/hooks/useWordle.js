@@ -115,8 +115,8 @@ const useWordle = (solution) => {
             //Calculate Win Percentage + Games Played + Games Won
             if (newWordsGuessed === 20) {
                 dispatch(openShowModal());
-                const winPercentage = (newGamesWon / (newGamesPlayed)) * 100;
-                newWinPercentage = Math.round(newWinPercentage)
+                let winPercentage = (newGamesWon / (newGamesPlayed)) * 100;
+                winPercentage = Math.round(winPercentage)
                 dispatch(setWinPercentage(winPercentage));
                 dispatch(setGamesPlayed(newGamesPlayed));
                 dispatch(setGamesWon(newGamesWon));

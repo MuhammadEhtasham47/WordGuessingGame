@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import useWordle from '../hooks/useWordle'
 import Grid from './Grid.jsx'
 import Keypad from './Keypad.jsx'
@@ -6,7 +6,7 @@ import ModalDetails from './ModalDetails.jsx'
 import Topbar from './Topbar.jsx'
 import { Box, Modal, Typography } from '@mui/material'
 import styled from '@emotion/styled'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import Settings from './Settings'
 import Help from './Help'
 import { Stats } from './Stats'
@@ -32,13 +32,10 @@ export default function Wordle() {
 
 
     const words = useSelector((state) => state.user.words)
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
 
     let solution = words[wordsGuessed]
     const { currentGuess, guesses, turn, usedKeys, handleKeyup, incorrectGuess, handleReset } = useWordle(solution)
-
-
-    console.log('showModal', showModal);
 
     useEffect(() => {
         window.addEventListener('keyup', handleKeyup);

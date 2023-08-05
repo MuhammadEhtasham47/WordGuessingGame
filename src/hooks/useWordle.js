@@ -12,7 +12,7 @@ const useWordle = (solution) => {
     const [turn, setTurn] = useState(0)
     const [currentGuess, setCurrentGuess] = useState('')
     const [guesses, setGuesses] = useState([...Array(6)]) // each guess is an array
-    const [history, setHistory] = useState([]) // each guess is a string
+    // const [history, setHistory] = useState([]) // each guess is a string
     const [isCorrect, setIsCorrect] = useState(false)
     const [usedKeys, setUsedKeys] = useState({}) // {a: 'grey', b: 'green', c: 'yellow'} etc
     const [incorrectGuess, setIncorrectGuess] = useState(0);
@@ -48,7 +48,7 @@ const useWordle = (solution) => {
         setTurn(0);
         setCurrentGuess('')
         setGuesses([...Array(6)])
-        setHistory([])
+        // setHistory([])
         setIsCorrect(false)
         setUsedKeys({})
         setIncorrectGuess(0);
@@ -190,9 +190,9 @@ const useWordle = (solution) => {
             newGuesses[turn] = formattedGuess
             return newGuesses
         })
-        setHistory(prevHistory => {
-            return [...prevHistory, currentGuess]
-        })
+        // setHistory(prevHistory => {
+        //     return [...prevHistory, currentGuess]
+        // })
         setTurn(prevTurn => {
             return prevTurn + 1
         })

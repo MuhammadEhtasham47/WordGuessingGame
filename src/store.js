@@ -1,4 +1,4 @@
-import { combineReducers, configureStore, getDefaultMiddleware, } from '@reduxjs/toolkit'
+import { combineReducers, configureStore, } from '@reduxjs/toolkit'
 import { persistReducer, persistStore } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
@@ -37,12 +37,3 @@ const store = configureStore({
 const persistor = persistStore(store)
 
 export { store, persistor }
-
-
-
-
-
-
-
-
-

@@ -1,7 +1,8 @@
 import axios from "axios";
 import { store } from "./store";
 
-const BASEURL = 'http://foreverdle.com'
+const BASEURL = 'https://foreverdle-backend-680f16db361a.herokuapp.com'
+
 
 export const publicRequest = axios.create({
     baseURL: BASEURL,

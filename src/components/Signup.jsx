@@ -116,7 +116,7 @@ const Signup = () => {
                             type="password"
                             autoComplete="off"
                         />
-                        <ErrorMessage name="email">
+                        <ErrorMessage name="password">
                             {(msg) => (
                                 <Box sx={{ display: "flex", alignItems: "center" }}>
                                     <ErrorOutline color="error" sx={{ mr: 1 }} />

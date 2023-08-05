@@ -1,11 +1,10 @@
 import { Clear } from '@mui/icons-material'
 import { Box, Button, Grid, Typography } from '@mui/material'
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { closeStats, setBestTry, setCurrentStreak, setGamesPlayed, setGamesWon, setMaxStreak, setWinPercentage } from '../redux/userSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { privateRequest } from '../apiRequests'
-import { toast } from 'react-hot-toast'
 
 export const Stats = () => {
     const themeMode = useSelector((state) => state.theme.themeMode)

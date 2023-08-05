@@ -5,7 +5,6 @@ import HelpIcon from '@mui/icons-material/Help';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useSelector } from 'react-redux';
-import { makeThemeDark, makeThemeLight } from '../redux/themeSlice';
 import { useDispatch } from 'react-redux';
 import { openHelp, openSettings, openStats } from '../redux/userSlice';
 

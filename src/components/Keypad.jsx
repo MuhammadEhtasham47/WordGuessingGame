@@ -1,8 +1,8 @@
 import { Box, Button } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import BackspaceOutlinedIcon from '@mui/icons-material/BackspaceOutlined';
-import styled from '@emotion/styled';
 import { useSelector } from 'react-redux';
+
 const lettersArray1 = [
     { key: "q" }, { key: "w" }, { key: "e" }, { key: "r" }, { key: "t" }, { key: "y" },
     { key: "u" }, { key: "i" }, { key: "o" }, { key: "p" },
@@ -16,14 +16,6 @@ const lettersArray3 = [
     { key: "z" }, { key: "x" }, { key: "c" }, { key: "v" }, { key: "b" },
     { key: "n" }, { key: "m" },
 ];
-
-
-const EnterButton = styled(Button)(() => ({
-    width: "auto",
-    fontWeight: 600,
-    fontSize: "15px",
-}));
-
 
 export default function Keypad({ usedKeys, handleKeyup, currentGuess }) {
     const themeMode = useSelector((state) => state.theme.themeMode)

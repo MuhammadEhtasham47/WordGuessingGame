@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import Wordle from "./components/Wordle.jsx";
 import { Toaster, toast } from 'react-hot-toast';
 import { createTheme, ThemeProvider } from '@mui/material/styles';

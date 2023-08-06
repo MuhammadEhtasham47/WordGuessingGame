@@ -27,8 +27,8 @@
     "yup": "^1.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-scripts --max_old_space_size=700 start",
+    "build": "react-scripts --max_old_space_size=700 build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

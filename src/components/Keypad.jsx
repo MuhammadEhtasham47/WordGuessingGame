@@ -21,6 +21,7 @@ export default function Keypad({ usedKeys, handleKeyup, currentGuess }) {
     const themeMode = useSelector((state) => state.theme.themeMode)
 
     const [guessLength, setGuessLength] = useState(0)
+
     useEffect(() => {
         let guessArray = currentGuess.split('')
         let guessArrayLength = guessArray.length
